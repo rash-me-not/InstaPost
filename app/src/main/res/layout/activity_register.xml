@@ -6,59 +6,60 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
+
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/scroll"
-            app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/logo"
-                app:srcCompat="@drawable/instapost"
-                android:gravity="center" android:adjustViewBounds="true"/>
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:id="@id/scroll"
+            android:focusable="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/logo"
+                    app:srcCompat="@drawable/instapost"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="center" android:adjustViewBounds="true"/>
+            <EditText android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/username"
+                      android:gravity="center"
+                      app:layout_constraintTop_toBottomOf="@id/logo"
+                      android:hint="@string/username"/>
+            <EditText android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/nickname"
+                      app:layout_constraintTop_toBottomOf="@id/fullname"
+                      android:hint="@string/nickname"
+                      android:gravity="center"/>
+            <EditText android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      app:layout_constraintTop_toBottomOf="@+id/nickname"
+                      android:id="@+id/password"
+                      android:hint="@string/password"
+                      android:gravity="center"/>
+            <EditText android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/email"
+                      app:layout_constraintTop_toBottomOf="@id/username"
+                      android:hint="@string/email"
+                      android:gravity="center"/>
+            <EditText android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/fullname"
+                      app:layout_constraintTop_toBottomOf="@id/email"
+                      android:hint="@string/fullname"
+                      android:gravity="center"/>
+            <Button
+                    android:text="@string/register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/email"
+                    android:id="@+id/registerButton"
+                    android:gravity="center"/>
+        </LinearLayout>
     </ScrollView>
 
-    <EditText android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:id="@+id/username"
-              app:layout_constraintTop_toBottomOf="@id/scroll"
-              android:gravity="center"
-              android:hint="@string/username"/>
-
-    <EditText android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:id="@+id/email"
-              app:layout_constraintTop_toBottomOf="@id/username"
-              android:hint="@string/email"
-              android:gravity="center"/>
-
-    <EditText android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:id="@+id/fullname"
-              app:layout_constraintTop_toBottomOf="@id/email"
-              android:hint="@string/fullname"
-              android:gravity="center"/>
-
-    <EditText android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:id="@+id/nickname"
-              app:layout_constraintTop_toBottomOf="@id/fullname"
-              android:hint="@string/nickname"
-              android:gravity="center"/>
-
-    <EditText android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              app:layout_constraintTop_toBottomOf="@+id/nickname"
-              android:id="@+id/password"
-              android:hint="@string/password"
-              android:gravity="center"/>
-
-    <Button
-            android:text="@string/register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/password"
-            android:id="@+id/registerButton"
-            android:gravity="center"/>
 </android.support.constraint.ConstraintLayout>

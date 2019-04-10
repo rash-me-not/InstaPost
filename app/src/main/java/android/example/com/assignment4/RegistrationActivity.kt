@@ -6,22 +6,25 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_register.*
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.util.*
 import kotlin.collections.HashMap
+import com.google.firebase.auth.FirebaseAuth
+
+
 
 class RegistrationActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var reference: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        auth = FirebaseAuth.getInstance()
+        reference = FirebaseDatabase.getInstance().getReference("USER_TABLE")
         registerButton.setOnClickListener {
 
             if(TextUtils.isEmpty(username.text) || TextUtils.isEmpty(fullname.text)
@@ -44,18 +47,11 @@ class RegistrationActivity : AppCompatActivity() {
                  val user = auth.currentUser
                  var user_id = user?.uid
 
-                reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id.toString())
 
-                lateinit var map : HashMap<String, String>
+                var map : HashMap<String, Any> =  hashMapOf("id" to user_id.toString(), "username" to username,
+                                    "fullname" to fullname, "nickname" to nickname, "password" to password, "email" to email)
 
-                map.put("id",user_id.toString())
-                map.put("username",username)
-                map.put("fullname",fullname)
-                map.put("nickname",nickname)
-                map.put("password",password)
-                map.put("email",email)
-
-                reference.setValue(map).addOnCompleteListener(this) {
+                reference.updateChildren(map).addOnCompleteListener(this) {
 
                     if(task.isSuccessful) {
                         val intent = Intent(this, InstaActivity::class.java)
